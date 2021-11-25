@@ -10,13 +10,13 @@ from PIL import Image, ImageTk
 
 
 # Arduino
-arduino = serial.Serial('COM4', 9600)
+arduino = serial.Serial('COM4', 9600, timeout=.1)
 time.sleep(2)
 
-def getDimension(height, width):
-    dimension = str(height)+"-"+str(width)
-    arduino.write(dimension.encode('utf-8'))
-    print(dimension)
+# def getDimension(height, width):
+#     dimension = str(height)+"."+str(width)
+#     arduino.write(dimension.encode('utf-8'))
+#     print(dimension)
 
 thres = 0.45
 nms_threshold = 0.2
@@ -75,9 +75,9 @@ while True:
                 cv2.putText(img, str(h)+"-"+str(w), (box[0]+10, box[1]+90),
                             cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 2)
                 
-                getDimension(h,w)
+                # getDimension(h,w)
            
-                # arduino.write(b"2")
+                arduino.write(b"2")
                 # dimension = str(h)+"-"+str(w)
                 # arduino.write(dimension.encode())
                 # return dimension
